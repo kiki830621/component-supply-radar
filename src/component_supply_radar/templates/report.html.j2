@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Component Supply Radar</title>
+  </head>
+  <body>
+    <main>
+      <h1>電子零件供應壓力報告</h1>
+      <p>{{ notice }}</p>
+      <table>
+        <thead>
+          <tr>
+            <th>觀測時間</th><th>資料來源</th><th>供應商分類</th><th>標準分類</th>
+            <th>壓力強度</th><th>壓力廣度</th><th>警訊狀態</th><th>覆蓋</th>
+            <th>直接曝險</th><th>主題曝險</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in rows %}
+          <tr>
+            <td>{{ row.observed_at }}</td>
+            <td>{{ row.source }}</td>
+            <td>{{ row.supplier_category }}</td>
+            <td>{{ row.canonical_category }}</td>
+            <td>{{ row.intensity }}</td>
+            <td>{{ row.breadth }}</td>
+            <td>{{ row.alert_state }}</td>
+            <td>{{ row.valid_core_count }}/{{ row.configured_core_count }}（{{ row.data_status }}）</td>
+            <td>{{ row.direct_provenance }}</td>
+            <td>{{ row.thematic_provenance }}</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="10">目前沒有可報告的資料。</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

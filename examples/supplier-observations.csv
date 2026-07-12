@@ -1,0 +1,4 @@
+mpn,manufacturer,observed_at_utc,supplier_category,canonical_category,taxonomy_version,panel_version,panel_role,quantity_available,quantity_factory,quantity_on_order,minimum_order_quantity,order_multiple,lead_time_days,lifecycle,region,currency,price_quantity_from,price_quantity_to,unit_price
+BAT54STA,onsemi,2026-06-11T00:00:00Z,Schottky Diodes,power-semiconductor,2026-v1,2026-Q3,core,10000,0,30000,100,100,14,ACTIVE,NA,USD,100,999,0.180
+BAT54STA,onsemi,2026-07-11T00:00:00Z,Schottky Diodes,power-semiconductor,2026-v1,2026-Q3,core,5000,0,10000,100,100,70,ACTIVE,NA,USD,100,999,0.218
+LM358,Texas Instruments,2026-07-11T00:00:00Z,Operational Amplifiers,analog-ic,2026-v1,2026-Q3,exploratory,8000,0,20000,50,50,28,ACTIVE,NA,USD,50,,0.120
