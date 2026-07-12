@@ -459,6 +459,18 @@ uv run component-supply-radar --help
 
 `.github\workflows\ci.yml` 會在乾淨的 `windows-latest` GitHub Actions runner 重做 frozen 安裝、PowerShell 剖析、完整測試與離線 quickstart。正式 API 與 MotherDuck 不會在 CI 呼叫，也不需要設定 secrets。
 
+## 授權
+
+本專案的程式碼與 repository 內文件依 [MIT License](LICENSE) 授權。
+
+```text
+Copyright (c) 2026 kiki830621
+```
+
+MIT License 允許使用、複製、修改、合併、發布與散布，但必須保留原始著作權及授權聲明，且軟體不提供任何明示或默示擔保。
+
+此授權只適用於本 repository 的程式碼與文件，不會改變 Future Electronics API、供應商資料、使用者 API key、真實 watchlist 或歷史資料的權利。這些內容仍受各自合約、授權條款及資料所有權限制。
+
 ## 參考資料
 
 - [Future Market Conditions Report](https://media.futureelectronics.com/doc/Market-Conditions-Report.pdf)
