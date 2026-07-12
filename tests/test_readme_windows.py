@@ -21,6 +21,12 @@ def test_readme_starts_with_a_complete_non_developer_handoff() -> None:
     assert "取得正式 Future 資料前" in README
 
 
+def test_readme_explains_public_code_and_private_data_boundary() -> None:
+    assert "程式碼 repository 是公開的" in README
+    assert "真實料號、API key 與歷史資料仍是私有資料" in README
+    assert "私人 GitHub repository" not in README
+
+
 def test_readme_is_windows_first_and_documents_installation() -> None:
     assert "Windows 10" in README and "Windows 11" in README
     assert ".\\scripts\\install.ps1" in README

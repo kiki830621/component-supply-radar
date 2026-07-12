@@ -16,7 +16,7 @@
 - `scripts/install.ps1` 處理工具檢查、Python 3.12、相依套件、資料目錄、環境設定檔與離線自我檢查。
 - 所有日常指令仍透過 `uv run component-supply-radar ...` 執行，避免依賴使用者目前啟用的 Python 環境。
 - 若電腦沒有 `uv`，安裝器優先使用 Windows Package Manager；無法使用時顯示 Astral 官方安裝指令與可操作的錯誤說明。
-- 使用者可從私人 GitHub repository 複製專案，或下載 repository ZIP 後解壓縮。GitHub 存取權的設定不由安裝器代辦。
+- 使用者可從公開 GitHub repository 複製專案，或下載 repository ZIP 後解壓縮。程式碼公開，但 `.env`、真實 watchlist、DuckDB、報告、日誌與備份維持私有且不得進入 Git。
 
 不採用手動 `pip`，因為容易混用系統 Python 且無法完整重現鎖定環境。不採用單一 `.exe`，因為 API 設定、資料檔、排程與版本更新仍需外部管理，反而增加維護成本。
 
