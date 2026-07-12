@@ -1,0 +1,3 @@
+mpn,manufacturer,supplier_category,canonical_category,taxonomy_version,panel_version,role,active
+BAT54STA,onsemi,Schottky Diodes,power-semiconductor,2026-v1,2026-Q3,core,true
+LM358,Texas Instruments,Operational Amplifiers,analog-ic,2026-v1,2026-Q3,exploratory,true

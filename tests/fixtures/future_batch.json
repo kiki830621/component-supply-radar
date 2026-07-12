@@ -1,0 +1,35 @@
+{
+  "lookup_parts": [
+    {
+      "part_number": "BAT54STA",
+      "lookup_results": "1 Offer found",
+      "offers": [
+        {
+          "part_id": {"mpn": "BAT54STA", "seller_part_number": "2028337"},
+          "part_attributes": [
+            {"name": "manufacturerName", "value": "onsemi"},
+            {"name": "productLifeCycle", "value": "ACTIVE"}
+          ],
+          "categories": [
+            {"id": "schottky-diodes", "name": "Schottky Diodes"}
+          ],
+          "quantities": {
+            "quantity_available": 5000,
+            "quantity_factory": 0,
+            "quantity_minimum": 100,
+            "quantity_on_order": 30000,
+            "factory_leadtime": 10,
+            "factory_leadtime_units": "Weeks",
+            "order_mult_qty": 100
+          },
+          "pricing": [
+            {"unit_price": 0.218, "quantity_from": 100, "quantity_to": 199},
+            {"unit_price": 0.190, "quantity_from": 200, "quantity_to": null}
+          ],
+          "people_and_places": {"site": "NA"},
+          "currency": {"currency_code": "USD"}
+        }
+      ]
+    }
+  ]
+}

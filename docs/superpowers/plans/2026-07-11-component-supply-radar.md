@@ -1,5 +1,7 @@
 # Component Supply Radar Implementation Plan
 
+> **Historical and superseded:** Native Windows distribution is defined by `../specs/2026-07-12-windows-distribution-design.md`, and automated ingestion is Future Electronics only. Do not implement the macOS or Mouser steps retained below as historical planning context.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build a tested macOS-local Python collector that stores permitted component supply history in DuckDB, shares permitted normalized tables through MotherDuck, creates Parquet backups, and emits HTML/CSV supply-tightness reports.

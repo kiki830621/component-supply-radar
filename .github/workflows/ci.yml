@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONUTF8: "1"
+
+jobs:
+  windows:
+    name: Native Windows
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Install uv and Python 3.12
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        with:
+          enable-cache: true
+          python-version: "3.12"
+
+      - name: Install locked developer dependencies
+        run: uv sync --frozen --all-groups
+
+      - name: Run tests
+        run: uv run pytest -q
+
+      - name: Run Ruff lint
+        run: uv run ruff check .
+
+      - name: Check formatting
+        run: uv run ruff format --check .
+
+      - name: Run type checks
+        run: uv run mypy src
+
+      - name: Check CLI
+        run: uv run component-supply-radar --help
+
+      - name: Parse every PowerShell script
+        shell: powershell
+        run: |
+          $HasErrors = $false
+          Get-ChildItem -LiteralPath .\scripts -Filter *.ps1 -File | ForEach-Object {
+            $Tokens = $null
+            $ParseErrors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile(
+              $_.FullName,
+              [ref]$Tokens,
+              [ref]$ParseErrors
+            ) | Out-Null
+            if ($ParseErrors.Count -gt 0) {
+              $HasErrors = $true
+              Write-Error "$($_.Name): $($ParseErrors -join '; ')"
+            }
+          }
+          if ($HasErrors) { exit 1 }
+
+      - name: Run Windows installer and offline quickstart
+        shell: powershell
+        run: .\scripts\install.ps1 -SkipUvInstall
+
+      - name: Verify offline report artifacts
+        shell: powershell
+        run: |
+          if (-not (Test-Path -LiteralPath .\work\install-check-report\latest.html)) { exit 1 }
+          if (-not (Test-Path -LiteralPath .\work\install-check-report\latest.csv)) { exit 1 }
+
+      - name: Upload offline report after a failure
+        if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: windows-offline-report
+          path: work/install-check-report/
+          if-no-files-found: ignore

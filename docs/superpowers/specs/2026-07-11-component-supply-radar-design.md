@@ -1,5 +1,7 @@
 # Component Supply Radar 設計規格
 
+> **歷史文件，已被取代：** Windows 安裝與交付以 `2026-07-12-windows-distribution-design.md` 為準；目前自動化輸入僅支援 Future Electronics。本文件中的 macOS、Mouser 與相關未實作規劃不得作為目前需求或操作說明。
+
 日期：2026-07-11
 
 ## 1. 目標
