@@ -6,6 +6,86 @@ Component Supply Radar 是一套給 Windows 使用者執行的電子零件供應
 
 本工具只供供應鏈研究使用，不提供投資建議、報酬預測、股票買賣訊號或自動下單。Future 單一通路的變化也不能代表整個半導體市場。
 
+## 給第一次使用的人：最短操作流程
+
+如果你只是收到這個專案、想讓它在 Windows 電腦每天自動收集資料，先照以下步驟做即可。後面的章節是各步驟的完整說明與疑難排解。
+
+### 第一步：把專案放在固定位置
+
+從私人 GitHub repository 下載 ZIP 並解壓縮，或用 Git 下載。建議放在例如：
+
+```text
+C:\Users\你的帳號\Documents\component-supply-radar
+```
+
+安裝排程後不要移動這個資料夾。若必須移動，請先移除排程，移動完成後再重新安裝排程。
+
+### 第二步：執行一鍵安裝
+
+在專案資料夾空白處按右鍵，選擇「在終端機中開啟」，確認目前是 PowerShell，然後貼上：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\install.ps1
+```
+
+安裝器會自動準備 `uv`、Python 3.12、隔離環境、所有固定版本相依套件、DuckDB、資料夾及離線測試報告。使用者不需要自己安裝 Python 套件。
+
+### 第三步：填入 Future API key
+
+```powershell
+notepad .\.env
+```
+
+把 Future 核發的 key 填在等號後面：
+
+```dotenv
+FUTURE_API_KEY=貼上你的正式金鑰
+```
+
+取得正式 Future 資料前必須完成這一步。沒有 key 時程式不會連線抓 Future 資料，但仍能執行離線示範與查看安裝測試報告。
+
+### 第四步：填入要追蹤的料號
+
+```powershell
+notepad .\data\watchlist.csv
+```
+
+保留第一列欄位名稱，把下面的示範料號換成自己的 MPN。建議先放 5–20 個有效料號，確認能取得資料後再逐步增加。
+
+### 第五步：手動跑第一次
+
+```powershell
+.\scripts\run_daily.ps1
+.\scripts\open_latest_report.ps1
+```
+
+第一個指令會收集、分析、產生報告及建立到期備份；第二個指令會開啟最新 HTML 報告。第一次只有一天資料時，30 日變化顯示「資料不足」是正常結果。
+
+### 第六步：確認成功後安裝每日排程
+
+```powershell
+.\scripts\install_scheduled_task.ps1
+.\scripts\scheduled_task_status.ps1
+```
+
+預設每天 07:30 執行。安裝排程後不需要每天手動開啟程式，但該 Windows 使用者必須登入，工作才會以使用者權限執行。
+
+### 安裝成功的判斷方式
+
+完成後應看到：
+
+- `data\radar.duckdb`：正式歷史資料庫。
+- `data\watchlist.csv`：自己的追蹤料號。
+- `work\install-check-report\latest.html`：不需要 API key 的安裝測試報告。
+- `reports\latest.html`：第一次正式每日流程產生的報告。
+- `data\logs\daily-output.log`：每日流程紀錄。
+
+若只想先確認安裝、不想立刻設定 API，可執行：
+
+```powershell
+Start-Process .\work\install-check-report\latest.html
+```
+
 ## 功能概要
 
 - 每日查詢自己設定的 300–1,000 個 MPN，不下載完整商品目錄。

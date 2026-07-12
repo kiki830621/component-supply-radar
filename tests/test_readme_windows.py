@@ -4,6 +4,23 @@ ROOT = Path(__file__).parents[1]
 README = (ROOT / "README.md").read_text(encoding="utf-8")
 
 
+def test_readme_starts_with_a_complete_non_developer_handoff() -> None:
+    heading = "## 給第一次使用的人：最短操作流程"
+    assert heading in README
+    assert README.index(heading) < README.index("## 功能概要")
+    for command in (
+        "powershell -ExecutionPolicy Bypass -File .\\scripts\\install.ps1",
+        "notepad .\\.env",
+        "notepad .\\data\\watchlist.csv",
+        ".\\scripts\\run_daily.ps1",
+        ".\\scripts\\open_latest_report.ps1",
+        ".\\scripts\\install_scheduled_task.ps1",
+    ):
+        assert command in README
+    assert "安裝成功的判斷方式" in README
+    assert "取得正式 Future 資料前" in README
+
+
 def test_readme_is_windows_first_and_documents_installation() -> None:
     assert "Windows 10" in README and "Windows 11" in README
     assert ".\\scripts\\install.ps1" in README
