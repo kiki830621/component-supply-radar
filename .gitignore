@@ -1,6 +1,7 @@
 .spectra/
 openspec/.vector-search.db*
 .env
+!.env.example
 .venv/
 __pycache__/
 .mypy_cache/

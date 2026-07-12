@@ -25,6 +25,17 @@ def test_python_version_requests_312() -> None:
     assert (ROOT / ".python-version").read_text(encoding="utf-8").strip() == "3.12"
 
 
+def test_installer_environment_template_is_tracked_by_git() -> None:
+    completed = subprocess.run(
+        ["git", "ls-files", "--error-unmatch", ".env.example"],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
+
+
 def test_package_declares_windows_support() -> None:
     project = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]
     classifiers = project["classifiers"]
