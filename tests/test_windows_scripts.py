@@ -69,6 +69,12 @@ def test_common_script_checks_native_exit_codes() -> None:
     assert "Split-Path -Parent $PSScriptRoot" in body
 
 
+def test_windows_commands_force_python_utf8_mode() -> None:
+    assert '$env:PYTHONUTF8 = "1"' in script("common.ps1")
+    workflow = (ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+    assert 'PYTHONUTF8: "1"' in workflow
+
+
 def test_scheduler_scripts_share_one_task_name_and_support_preview() -> None:
     for name in (
         "install_scheduled_task.ps1",

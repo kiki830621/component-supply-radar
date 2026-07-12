@@ -1,5 +1,6 @@
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
+$env:PYTHONUTF8 = "1"
 
 function Get-RepositoryRoot {
     return Split-Path -Parent $PSScriptRoot
