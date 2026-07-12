@@ -6,13 +6,15 @@ Component Supply Radar 是一套給 Windows 使用者執行的電子零件供應
 
 本工具只供供應鏈研究使用，不提供投資建議、報酬預測、股票買賣訊號或自動下單。Future 單一通路的變化也不能代表整個半導體市場。
 
+程式碼 repository 是公開的，任何人都能閱讀與下載；真實料號、API key 與歷史資料仍是私有資料，不會提交到 GitHub。公開程式碼不代表供應商資料或 API 回應可以任意轉載，實際保存與分享權仍以使用者和 Future Electronics 的授權條款為準。
+
 ## 給第一次使用的人：最短操作流程
 
 如果你只是收到這個專案、想讓它在 Windows 電腦每天自動收集資料，先照以下步驟做即可。後面的章節是各步驟的完整說明與疑難排解。
 
 ### 第一步：把專案放在固定位置
 
-從私人 GitHub repository 下載 ZIP 並解壓縮，或用 Git 下載。建議放在例如：
+從公開 GitHub repository 下載 ZIP 並解壓縮，或用 Git 下載。建議放在例如：
 
 ```text
 C:\Users\你的帳號\Documents\component-supply-radar
@@ -110,7 +112,7 @@ Start-Process .\work\install-check-report\latest.html
 
 ## 取得私人專案
 
-這是私人 GitHub repository，使用者必須先由 repository 擁有者加入存取權。
+這是公開 GitHub repository，不需要先取得 repository 存取權即可下載。若要回報問題或提交修改，才需要 GitHub 帳號。
 
 已安裝 Git 的使用者，可在 PowerShell 執行：
 

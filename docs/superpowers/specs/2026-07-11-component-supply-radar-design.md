@@ -183,7 +183,7 @@ README 會列出 Future Electronics Market Conditions Report、ECIA、SIA、WSTS
 
 ## 11. GitHub 邊界
 
-建立 `kiki830621/component-supply-radar` private repo，預設分支為 `main`。Git 只保存程式、測試、文件、fixture 和不含真實商業資料的示範檔。
+此處原規劃為 private repo；2026-07-12 發布決定已改為公開程式碼 repository。預設分支為 `main`，Git 只保存程式、測試、文件、fixture 和不含真實商業資料的示範檔；真實料號、金鑰與歷史資料維持私有。
 
 下列內容必須忽略：
 
