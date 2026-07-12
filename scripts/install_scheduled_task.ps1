@@ -1,4 +1,4 @@
-param(
+﻿param(
     [ValidatePattern("^([01]\d|2[0-3]):[0-5]\d$")]
     [string]$At = "07:30",
     [switch]$WhatIf

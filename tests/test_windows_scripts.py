@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import codecs
 import os
 import shutil
 import subprocess
@@ -13,6 +14,11 @@ ROOT = Path(__file__).parents[1]
 
 def script(name: str) -> str:
     return (ROOT / "scripts" / name).read_text(encoding="utf-8")
+
+
+def test_powershell_scripts_use_utf8_bom_for_windows_powershell_51() -> None:
+    for path in sorted((ROOT / "scripts").glob("*.ps1")):
+        assert path.read_bytes().startswith(codecs.BOM_UTF8), path.name
 
 
 def test_python_version_requests_312() -> None:

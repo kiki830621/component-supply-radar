@@ -1,4 +1,4 @@
-param(
+﻿param(
     [switch]$WhatIf,
     [switch]$SkipUvInstall,
     [switch]$SkipSelfCheck
