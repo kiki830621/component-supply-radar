@@ -1,10 +1,14 @@
 import os
 import subprocess
+import sys
 from pathlib import Path
+
+import pytest
 
 ROOT = Path(__file__).parents[1]
 INSTALL = ROOT / "scripts" / "install_launchd.sh"
 UNINSTALL = ROOT / "scripts" / "uninstall_launchd.sh"
+pytestmark = pytest.mark.skipif(sys.platform != "darwin", reason="launchd is macOS-only")
 
 
 def run(script: Path, tmp_path: Path) -> subprocess.CompletedProcess[str]:

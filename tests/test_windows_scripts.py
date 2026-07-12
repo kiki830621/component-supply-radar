@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import shutil
 import subprocess
 import tomllib
@@ -23,6 +24,14 @@ def test_package_declares_windows_support() -> None:
     classifiers = project["classifiers"]
     assert "Operating System :: Microsoft :: Windows :: Windows 10" in classifiers
     assert "Operating System :: Microsoft :: Windows :: Windows 11" in classifiers
+
+
+def test_windows_runtime_installs_iana_timezone_data() -> None:
+    project = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]
+    assert any(
+        dependency.startswith("tzdata") and "platform_system == 'Windows'" in dependency
+        for dependency in project["dependencies"]
+    )
 
 
 def test_installer_is_idempotent_and_uses_frozen_runtime_dependencies() -> None:
@@ -115,14 +124,15 @@ def test_powershell_scripts_parse_when_a_runtime_is_available() -> None:
     command = (
         "$errors = $null; "
         "[System.Management.Automation.Language.Parser]::ParseFile("
-        "$args[0], [ref]$null, [ref]$errors) | Out-Null; "
+        "$env:CSR_SCRIPT_TO_PARSE, [ref]$null, [ref]$errors) | Out-Null; "
         "if ($errors.Count -gt 0) { $errors | ForEach-Object { Write-Error $_ }; exit 1 }"
     )
     for path in sorted((ROOT / "scripts").glob("*.ps1")):
         completed = subprocess.run(
-            [executable, "-NoProfile", "-Command", command, str(path)],
+            [executable, "-NoProfile", "-Command", command],
             check=False,
             capture_output=True,
             text=True,
+            env={**os.environ, "CSR_SCRIPT_TO_PARSE": str(path)},
         )
         assert completed.returncode == 0, f"{path.name}: {completed.stderr}"
